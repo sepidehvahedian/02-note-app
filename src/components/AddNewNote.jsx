@@ -1,27 +1,28 @@
 import React, { useState } from "react";
 
-function AddNewNote() {
-  const [notes, setNotes] = useState({ title: "", description: "" });
+function AddNewNote({ AddNote }) {
+  const [labelInput, setLabelInput] = useState({ title: "", description: "" });
 
   const handleInputChange = (e) => {
     // console.log(e);
     const { name, value } = e.target;
-    setNotes((prevNotes) => ({
-      ...prevNotes,
+    setLabelInput((prevLabelInput) => ({
+      ...prevLabelInput,
       [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!labelInput.title || !labelInput.description) return null;
     const newNote = {
-      ...notes,
+      ...labelInput,
       id: Date.now(),
       completed: false,
       createAt: new Date().toISOString(),
     };
-    // Add your submit logic here
-    console.log(newNote);
+    setLabelInput({ title: "", description: "" });
+    AddNote(newNote);
   };
 
   return (
@@ -32,14 +33,14 @@ function AddNewNote() {
           type="text"
           className="text-field"
           name="title"
-          value={notes.title}
+          value={labelInput.title}
           onChange={handleInputChange}
         />
         <input
           type="text"
           className="text-field"
           name="description"
-          value={notes.description}
+          value={labelInput.description}
           onChange={handleInputChange}
         />
         <button className="btn btn--primary">Add New Note</button>

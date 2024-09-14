@@ -19,7 +19,7 @@ function AddNewNote({ AddNote }) {
       ...labelInput,
       id: Date.now(),
       completed: false,
-      createAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
     };
     setLabelInput({ title: "", description: "" });
     AddNote(newNote);

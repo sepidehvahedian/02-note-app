@@ -13,10 +13,10 @@ function App() {
     <div className="container">
       <div className="note-header">note header</div>
       <div className="note-app">
-        {/* <div className="add-new-note">add new note form</div> */}
         <AddNewNote AddNote={handleAddNote} />
-        <div className="note-container">notes</div>
-        <NoteList notes={notes} />
+        <div className="note-container">
+          <NoteList notes={notes} />
+        </div>
       </div>
     </div>
   );

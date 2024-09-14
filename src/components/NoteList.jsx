@@ -10,6 +10,7 @@ function NoteList({ notes, onDelete, onComplete }) {
           onDelete={onDelete}
           notes={notes}
           onComplete={onComplete}
+          checked={note.completed}
         />
       ))}
     </div>
@@ -25,7 +26,7 @@ function NoteItem({ note, onDelete, onComplete }) {
     day: "numeric",
   };
   return (
-    <div className="note-item">
+    <div className={`note-item ${note.completed ? "completed" : ""}`}>
       <div className="note-item__header">
         <div>
           <p className="title">{note.title}</p>

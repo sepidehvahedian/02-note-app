@@ -16,10 +16,15 @@ function App() {
 
   const handleToggle = (e) => {
     const noteId = Number(e.target.value);
-    const newNotes = notes.map((n) =>
-      n.id === noteId ? { ...n, completed: !n.completed } : n
+    // const newNotes = notes.map((n) =>
+    //   n.id === noteId ? { ...n, completed: !n.completed } : n
+    // );
+    // setNotes(newNotes);
+    setNotes((prevNotes) =>
+      prevNotes.map((n) =>
+        n.id === noteId ? { ...n, completed: !n.completed } : n
+      )
     );
-    setNotes(newNotes);
   };
 
   return (

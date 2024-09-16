@@ -1,9 +1,32 @@
 import React, { useState } from "react";
 
-function NoteList({ notes, onDelete, onComplete }) {
+function NoteList({ notes, onDelete, onComplete, sortBy }) {
+  // مرتب‌سازی یادداشت‌ها بر اساس زمان
+  let sortedNotes = notes;
+
+  if (sortBy === "earliest") {
+    sortedNotes = [...notes].sort(
+      (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+    );
+  }
+
+  if (sortBy === "latest") {
+    sortedNotes = [...notes].sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+  }
+
+  if (sortBy === "completed") {
+    sortedNotes = [...notes].sort((a, b) => {
+      if (a.completed === b.completed) {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      }
+      return a.completed ? -1 : 1;
+    });
+  }
   return (
     <div className="note-list">
-      {notes.map((note) => (
+      {sortedNotes.map((note) => (
         <NoteItem
           key={note.id}
           note={note}
